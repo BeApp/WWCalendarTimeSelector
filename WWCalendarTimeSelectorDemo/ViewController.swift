@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     fileprivate var multipleDates: [Date] = []
     
     fileprivate let demo: [String] = [
-        "DateMonth",//0
+        "DateMonth",// 0
         "Month",//1
         "Year",//2
         "Time",//3
