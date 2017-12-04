@@ -1004,7 +1004,7 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func showDate(_ userTap: Bool, animated: Bool = true) {
+    fileprivate func showDate(_ userTap: Bool, animated: Bool = true) {
         changeSelDate(animated: animated)
         
         if userTap {
@@ -1038,7 +1038,7 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func showMonth(_ userTap: Bool, animated: Bool = true) {
+    fileprivate func showMonth(_ userTap: Bool, animated: Bool = true) {
         changeSelMonth(animated: animated)
         
         if userTap {
@@ -1067,7 +1067,7 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
- func showYear(_ userTap: Bool, animated: Bool = true) {
+    fileprivate func showYear(_ userTap: Bool, animated: Bool = true) {
         changeSelYear(animated: animated)
         
         if userTap {
@@ -1098,7 +1098,7 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func showTime(_ userTap: Bool, animated: Bool = true) {
+    fileprivate func showTime(_ userTap: Bool, animated: Bool = true) {
         if userTap {
             if selCurrrent.showTime {
                 selTimeStateHour = !selTimeStateHour
@@ -1185,7 +1185,9 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
             rangeEndLabel.textColor = isSelectingStartRange ? optionSelectorPanelFontColorDate : optionSelectorPanelFontColorDateHighlight
         }
         
-        let timeText = optionCurrentDate.stringFromFormat("h':'mma").lowercased()
+       // let timeText = optionCurrentDate.stringFromFormat("h':'mma").lowercased()
+        let timeText = optionCurrentDate.stringFromFormat("HH':'mm").lowercased()
+
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = NSTextAlignment.center
         let attrText = NSMutableAttributedString(string: timeText, attributes: [NSAttributedStringKey.font: optionSelectorPanelFontTime, NSAttributedStringKey.foregroundColor: optionSelectorPanelFontColorTime, NSAttributedStringKey.paragraphStyle: paragraph])
@@ -1980,7 +1982,6 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
     
     internal func WWClockSwitchAMPM(isAM: Bool, isPM: Bool) {
         var newHour = optionCurrentDate.hour
-       
         if isAM && newHour >= 12 {
             newHour = newHour - 12
         }
@@ -2319,7 +2320,10 @@ internal class WWClock: UIView {
     fileprivate var ampmY: CGFloat = 0
     fileprivate let numberCircleBorder: CGFloat = 12
     fileprivate let centerPieceSize = 4
-    fileprivate let hours = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    
+    //fileprivate let hours = [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    fileprivate let hours = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
     fileprivate var minutes: [Int] = []
     
     internal override func draw(_ rect: CGRect) {
@@ -2539,7 +2543,9 @@ internal class WWClock: UIView {
     
     fileprivate func get12Hour(_ date: Date) -> Int {
         let hr = date.hour
-        return hr == 0 || hr == 12 ? 12 : hr < 12 ? hr : hr - 12
+        return hr
+
+        // return hr == 0 || hr == 12 ? 12 : hr < 12 ? hr : hr - 12
     }
     
     fileprivate func getClockRad(_ degrees: CGFloat) -> CGFloat {
@@ -2592,16 +2598,17 @@ internal class WWClock: UIView {
             }
             
             let hour = hours[index]
-            let time = delegate.WWClockGetTime()
+            //let time = delegate.WWClockGetTime()
             
-            print(time)
+            delegate.WWClockSetHourMilitary(hour)
             
-            if hour == 12 {
+            /*if hour == 12 {
                 delegate.WWClockSetHourMilitary(time.hour < 12 ? 0 : 12)
             }
             else {
                 delegate.WWClockSetHourMilitary(time.hour < 12 ? hour : 12 + hour)
             }
+             */
             
         }
         else {
