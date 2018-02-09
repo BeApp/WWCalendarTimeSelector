@@ -1150,6 +1150,7 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
         } else {
             animations()
         }
+        self.clockView.ampmSize
     }
     
     fileprivate func updateDate() {
@@ -2311,7 +2312,7 @@ internal class WWClock: UIView {
     }
     
     fileprivate let border: CGFloat = 8
-    fileprivate let ampmSize: CGFloat = 52
+    fileprivate let ampmSize: CGFloat = 0
     fileprivate var faceSize: CGFloat = 0
     fileprivate var faceX: CGFloat = 0
     fileprivate let faceY: CGFloat = 8
