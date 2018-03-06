@@ -1977,6 +1977,10 @@ open class WWCalendarTimeSelector: UIViewController, UITableViewDelegate, UITabl
         }
     }
     
+    func WWClockSetTime() {
+        showTime(true)
+    }
+    
     internal func WWClockGetTime() -> Date {
         return optionCurrentDate
     }
@@ -2275,6 +2279,7 @@ internal protocol WWClockProtocol: NSObjectProtocol {
     func WWClockSwitchAMPM(isAM: Bool, isPM: Bool)
     func WWClockSetHourMilitary(_ hour: Int)
     func WWClockSetMinute(_ minute: Int)
+    func WWClockSetTime()
 }
 
 internal class WWClock: UIView {
@@ -2570,6 +2575,7 @@ internal class WWClock: UIView {
             }
             else {
                 touchClock(pt: pt)
+                delegate.WWClockSetTime()
             }
         }
     }
